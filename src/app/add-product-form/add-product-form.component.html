@@ -8,26 +8,26 @@
 
                     <label for="product_name">Product Name</label>
                     <input formControlName="product_name" type="text" class="form-control">
-                    <!-- <div *ngIf="productName.touched && productName.invalid" class="alert alert-danger">ProductName required!</div> -->
+                    <div *ngIf="addProductForm.controls.product_name.touched && addProductForm.get('product_name')?.errors?.required" class="alert alert-danger">Product Name required!</div>
                 </div>
 
                 <div class="form-group">
                     <label for="stock">Stock</label>
                     <input formControlName="stock" type="number" class="form-control">
-                    <!-- <div *ngIf="Stock.touched && Stock.invalid" class="alert alert-danger">Stock required!</div> -->
+                    <div *ngIf="addProductForm.controls.Stock.touched && addProductForm.get('Stock')?.errors?.required" class="alert alert-danger">Stock required!</div>
                 </div>
 
                 <div class="form-group">
                     <label for="selling_price">Selling Price</label>
                     <input formControlName="selling_price" type="number" class="form-control">
-                    <!-- <div *ngIf="sp.touched && sp.invalid" class="alert alert-danger">Selling price required!</div> -->
+                    <div *ngIf="addProductForm.controls.selling_price.touched && addProductForm.get('selling_price')?.errors?.required" class="alert alert-danger">Selling price required!</div>
                 </div>
 
 
                 <div class="form-group">
                     <label for="cost_price">Cost Price</label>
                     <input formControlName="cost_price" type="number" class="form-control">
-                    <!-- <div *ngIf="cp.touched && cp.invalid" class="alert alert-danger">Cost price required!</div> -->
+                    <div *ngIf="addProductForm.controls.cost_price.touched && addProductForm.get('cost_price')?.errors?.required" class="alert alert-danger">Cost price required!</div>
                 </div>
 
 

@@ -1,30 +1,44 @@
-<a *ngIf="!isAdminLoggedIn()" routerLink="login">Login</a>
+<a *ngIf="!isAdminLoggedIn()" routerLink="login" class="btn btn-link" role="button" aria-pressed="true">AdminLogin </a>
+
+<a *ngIf="!isAdminLoggedIn()" routerLink="add-product" class="btn btn-link" role="button" aria-pressed="true">AddProduct</a>
 
 
-<a *ngIf="!isAdminLoggedIn()" routerLink="add-product">Add Product</a>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <p *ngIf="loadedPosts.length ==0 ">No posts available!</p>
+
+        <table class="table *ngIf= loadedPosts.length > 0 ">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Cost Price</th>
+                    <th scope="col">Selling Price</th>
+                    <th *ngIf="!isAdminLoggedIn()" scope="col">Edit Product</th>
+                    <th *ngIf="!isAdminLoggedIn()" scope="col">Delete Product</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let prodc of loadedPosts">
+
+                    <th>{{ prodc.product_id }}</th>
+                    <th>{{ prodc.product_name }}</th>
+                    <th>{{ prodc.stock }} </th>
+                    <th *ngIf="!isAdminLoggedIn()">{{ prodc.cost_price }} </th>
+                    <th>{{ prodc.selling_price }} </th>
+                    <!-- <p> {{ prodc.created_date }} </p> -->
+                    <!-- <p> <a *ngIf="!isAdminLoggedIn()" [routerLink]="['edit-product',prodc.product_id]">Edit</a></p> -->
+
+                    <th> <a *ngIf="!isAdminLoggedIn()" [routerLink]="['edit-product',prodc.product_id]"
+                            class="btn btn-outline-info" role="button" aria-pressed="true">Edit</a> </th>
+
+                    <th> <button type="button" class="btn btn-outline-danger">Delete</button> </th>
+                </tr>
+            </tbody>
+        </table>
 
 
 
-<div class='row'>
-    <!-- <div class="col-xs-12 col-md-6 col-md-offset-3"> -->
-        <!-- <p *ngIf="loadedPosts.length ==0">No posts available!</p> -->
-        <!-- <ul class="list-group" *ngIf="loadedPosts.length > 0"> -->
-            <!-- <ul class="list-group"> -->
-            <li class="list-group-item" *ngFor="let prodc of loadedPosts">
-                
-                
-                <!-- <h3>HEHE!</h3> -->
-                <h3>{{ prodc.product_name }}</h3> 
-                <p> {{ prodc.product_id }} </p>
-                <p> {{ prodc.cost_price }} </p>
-                <p> {{ prodc.selling_price }} </p>
-                <p> {{ prodc.created_date }} </p>
-
-                <p> <a *ngIf="!isAdminLoggedIn()" [routerLink]="['edit-product',prodc.product_id]">Edit</a>
-                </p>
-
-            </li>
-        <!-- </ul> -->
-    <!-- </div> -->
-
+    </div>
 </div>

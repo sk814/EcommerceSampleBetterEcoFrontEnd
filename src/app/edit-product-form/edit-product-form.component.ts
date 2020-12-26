@@ -10,7 +10,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class EditProductFormComponent implements OnInit {
 
-  editProductForm; 
+  editProductForm;
   productId:any;
 
   constructor(private router : Router,private fb: FormBuilder,private http: HttpClient,private route: ActivatedRoute) {
@@ -39,9 +39,6 @@ export class EditProductFormComponent implements OnInit {
     this.editProductForm.controls.selling_price.setValue(productObb.selling_price);
     this.editProductForm.controls.cost_price.setValue(productObb.cost_price);
 
-
-
-
     })
   }
 
@@ -56,7 +53,7 @@ export class EditProductFormComponent implements OnInit {
         formValue
       )
       .subscribe(responseData => {
-      this.router.navigate(["/products"])
+      this.router.navigate([""])
       });
   }
 

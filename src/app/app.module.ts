@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductsComponent } from './products/products.component';
 import {HttpClientModule} from '@angular/common/http';
 import { EditProductFormComponent } from './edit-product-form/edit-product-form.component';
-
+import { DeleteProductComponent } from './delete-product/delete-product.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,6 +17,7 @@ import { EditProductFormComponent } from './edit-product-form/edit-product-form.
     AdminloginComponent,
     ProductsComponent,
     EditProductFormComponent,
+    DeleteProductComponent,
     
   ],
   imports: [

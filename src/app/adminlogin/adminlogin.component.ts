@@ -1,5 +1,8 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { JsonpModule } from '@angular/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-adminlogin',
@@ -11,6 +14,10 @@ export class AdminloginComponent implements OnInit {
   }
 
 
+  constructor(private router : Router, private http: HttpClient) {
+
+  }
+  
   form= new FormGroup({
     username: new FormControl('',Validators.required),
     password: new FormControl('',Validators.required)
@@ -26,16 +33,50 @@ export class AdminloginComponent implements OnInit {
 
   login()
   {
-    // if(this.form.get('username')!="admin" || this.password!="admin")
-    // {
-      this.form.setErrors({
-        invalidLogin: true
-      });
+
+    const headers=new HttpHeaders({
+      'Content-Type':'application/json; charset=utf-8'
+    });
+    
+   this.http
+     .post(
+       'http://localhost:8000/api/login/',
+       this.form.value,
+       {
+          headers: headers
+       }
+        // JSON.stringify(
+
+        //   {
+        //     username: this.form.get('username'),
+        //     password: this.form.get('password')
+        // }
+
+        // ) 
+     )
+     .subscribe(responseData => {
+
+        
+    // else if (res.status === 200) {
+    //     return [{ status: res.status, json: res }]
     // }
-    // else{}
 
+       console.log(responseData, responseData.valueOf);
+      //  console.log(responseData.valueOf);
 
+      this.router.navigate([""])
 
+       
+     },
+     error => {console.log('USER NOT FOUND!'+ JSON.stringify(error));}
+
+     )
+     ;
+  // this.http
+  //    .post(
+  //      this.form.value);
   }
+
+
 
 }
