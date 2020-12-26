@@ -1,0 +1,44 @@
+<form [formGroup]="editProductForm" (ngSubmit)="onEditProd()">
+
+    <h3>Edit products</h3>
+    
+    <div class="form-group">
+        <label for="product_id">id</label>
+        <input formControlName="product_id" type="text" class="form-control">
+        <!-- <div *ngIf="productName.touched && productName.invalid" class="alert alert-danger">ProductName required!</div> -->
+    </div>
+    <div class="form-group">
+
+        <label for="product_name">Product Name</label>
+        <input formControlName="product_name" type="text" class="form-control">
+        <!-- <div *ngIf="productName.touched && productName.invalid" class="alert alert-danger">ProductName required!</div> -->
+    </div>
+
+    <div class="form-group">
+        <label for="stock">Stock</label>
+        <input formControlName="stock" type="number" class="form-control">
+        <!-- <div *ngIf="Stock.touched && Stock.invalid" class="alert alert-danger">Stock required!</div> -->
+    </div>
+
+    <div class="form-group">
+        <label for="selling_price">Selling Price</label>
+        <input formControlName="selling_price" type="number" class="form-control">
+        <!-- <div *ngIf="sp.touched && sp.invalid" class="alert alert-danger">Selling price required!</div> -->
+    </div>
+
+
+    <div class="form-group">
+        <label for="cost_price">Cost Price</label>
+        <input formControlName="cost_price" type="number" class="form-control">
+        <!-- <div *ngIf="cp.touched && cp.invalid" class="alert alert-danger">Cost price required!</div> -->
+    </div>
+
+
+
+
+    <button class="btn btn-primary" 
+            type="submit" 
+            [disabled]="!editProductForm.valid">
+            Add Product
+    </button>
+</form>
