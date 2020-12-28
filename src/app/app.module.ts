@@ -7,9 +7,10 @@ import { AddProductFormComponent } from './add-product-form/add-product-form.com
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductsComponent } from './products/products.component';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EditProductFormComponent } from './edit-product-form/edit-product-form.component';
-import { DeleteProductComponent } from './delete-product/delete-product.component';
+import { HttpInterceptorInterceptor } from './http-interceptor.interceptor';
+import { ShowproductbyidComponent } from './showproductbyid/showproductbyid.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,8 +18,8 @@ import { DeleteProductComponent } from './delete-product/delete-product.componen
     AdminloginComponent,
     ProductsComponent,
     EditProductFormComponent,
-    DeleteProductComponent,
-    
+    ShowproductbyidComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -29,7 +30,9 @@ import { DeleteProductComponent } from './delete-product/delete-product.componen
     ReactiveFormsModule
 
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

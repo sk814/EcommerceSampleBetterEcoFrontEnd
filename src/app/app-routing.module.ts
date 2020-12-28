@@ -4,13 +4,15 @@ import { AddProductFormComponent } from './add-product-form/add-product-form.com
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
 import { EditProductFormComponent } from './edit-product-form/edit-product-form.component';
 import { ProductsComponent } from './products/products.component';
+import { ShowproductbyidComponent } from './showproductbyid/showproductbyid.component';
 
 const routes: Routes = [
-  {path:"login",component:AdminloginComponent},
-  {path:"add-product",component:AddProductFormComponent},
-  {path:"edit-product/:id",component:EditProductFormComponent},
-  {path:"products",component:ProductsComponent},
-  {path:"",component:ProductsComponent},
+  { path: "login", component: AdminloginComponent },
+  { path: "add-product", component: AddProductFormComponent },
+  { path: "edit-product/:id", component: EditProductFormComponent },
+  { path: "show-product-by-id/:id", component: ShowproductbyidComponent },
+  { path: "products", component: ProductsComponent },
+  { path: "", component: ProductsComponent },
 ];
 
 @NgModule({

@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  backendUrl:"http://ec2-3-134-93-173.us-east-2.compute.amazonaws.com"
 };
 
 /*
@@ -14,3 +15,6 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
+
+// ng build --prod

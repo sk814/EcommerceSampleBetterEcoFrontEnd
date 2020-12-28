@@ -1,44 +1,69 @@
-<a *ngIf="!isAdminLoggedIn()" routerLink="login" class="btn btn-link" role="button" aria-pressed="true">AdminLogin </a>
+<h1 class="text-light bg-dark">Products List</h1>
+<br>
+<a *ngIf="!isLoggedIn" routerLink="login" class="btn btn-link" role="button" aria-pressed="true">AdminLogin </a>
 
-<a *ngIf="!isAdminLoggedIn()" routerLink="add-product" class="btn btn-link" role="button" aria-pressed="true">AddProduct</a>
+<a *ngIf="isLoggedIn" routerLink="add-product" class="btn btn-outline-dark" role="button"
+  aria-pressed="true">AddProduct</a>
 
+<a *ngIf="isLoggedIn" (click)="logout()" class="btn btn-link" role="button" aria-pressed="true">Logout</a>
 
-<div class="container">
-    <div class="row justify-content-md-center">
-        <p *ngIf="loadedPosts.length ==0 ">No posts available!</p>
+<div class="main">
 
-        <table class="table *ngIf= loadedPosts.length > 0 ">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Stock</th>
-                    <th scope="col">Cost Price</th>
-                    <th scope="col">Selling Price</th>
-                    <th *ngIf="!isAdminLoggedIn()" scope="col">Edit Product</th>
-                    <th *ngIf="!isAdminLoggedIn()" scope="col">Delete Product</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let prodc of loadedPosts">
-
-                    <th>{{ prodc.product_id }}</th>
-                    <th>{{ prodc.product_name }}</th>
-                    <th>{{ prodc.stock }} </th>
-                    <th *ngIf="!isAdminLoggedIn()">{{ prodc.cost_price }} </th>
-                    <th>{{ prodc.selling_price }} </th>
-                    <!-- <p> {{ prodc.created_date }} </p> -->
-                    <!-- <p> <a *ngIf="!isAdminLoggedIn()" [routerLink]="['edit-product',prodc.product_id]">Edit</a></p> -->
-
-                    <th> <a *ngIf="!isAdminLoggedIn()" [routerLink]="['edit-product',prodc.product_id]"
-                            class="btn btn-outline-info" role="button" aria-pressed="true">Edit</a> </th>
-
-                    <th> <button type="button" class="btn btn-outline-danger">Delete</button> </th>
-                </tr>
-            </tbody>
-        </table>
-
-
-
+  <div class="input-group">
+    <input type="text" class="form-control" placeholder="Search by product Name" [(ngModel)]="searchByProuctName">
+    <div class="input-group-append">
+      <button class="btn btn-secondary" type="button" (click)="search()">
+        Search
+      </button>
     </div>
-</div>
+  </div>
+  <br>
+  <div class="input-group">
+    <input type="number" placeholder="Stock less than equal to:" [(ngModel)]="filterByStock">
+    <div class="input-group-append">
+      <button class="btn btn-secondary" type="button" (click)="filter()">
+        Filter
+      </button>
+    </div>
+  </div>
+  <br>
+
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <!-- <p *ngIf="loadedPosts.length == 0 ">No posts available!</p> -->
+
+      <table class="table *ngIf= loadedPosts.length > 0 ">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Stock</th>
+            <th *ngIf="isLoggedIn" scope="col">Cost Price</th>
+            <th scope="col">Selling Price</th>
+            <th *ngIf="isLoggedIn" scope="col">Edit Product</th>
+            <th *ngIf="isLoggedIn" scope="col">Delete Product</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prodc of loadedPosts">
+
+
+            <th>
+              <a [routerLink]="['show-product-by-id',prodc.product_id]" class="btn btn-outline-info enabled"
+                role="button" aria-pressed="true" [ngClass]="{'btn btn-outline-info disabled' : !isLoggedIn}">
+                {{ prodc.product_id }}
+              </a>
+            </th>
+            <th>{{ prodc.product_name }}</th>
+            <th>{{ prodc.stock }} </th>
+            <th *ngIf="isLoggedIn">{{ prodc.cost_price }} </th>
+            <th>{{ prodc.selling_price }} </th>
+            <th> <a *ngIf="isLoggedIn" [routerLink]="['edit-product',prodc.product_id]" class="btn btn-outline-info"
+                role="button" aria-pressed="true">Edit</a> </th>
+            <th> <button *ngIf="isLoggedIn" type="button" class="btn btn-outline-danger"
+                (click)="deleteProduct(prodc.product_id)">Delete</button> </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ProductService } from '../service/product.service';
 
 @Component({
   selector: 'app-add-product-form',
@@ -10,46 +10,26 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 })
 export class AddProductFormComponent implements OnInit {
-  
+
   addProductForm;
-  
 
-  constructor(private fb: FormBuilder,private http: HttpClient) { 
-this.addProductForm=this.fb.group({
-  product_name:[null,Validators.required],
-  stock:[0,Validators.required],
-  selling_price:[0,Validators.required],
-  cost_price:[0,Validators.required],
-})
-
-
-
+  constructor(private fb: FormBuilder, private productService: ProductService, private router: Router) {
+    this.addProductForm = this.fb.group({
+      product_name: [null, Validators.required],
+      stock: [0, Validators.required],
+      selling_price: [0, Validators.required],
+      cost_price: [0, Validators.required],
+    })
   }
 
   ngOnInit() {
   }
 
   onCreatePost() {
-    // Send Http request
-   const formValue = this.addProductForm.value;
-    this.http
-      .post(
-        'http://localhost:8000/api/products/',
-        formValue
-      )
-      .subscribe(responseData => {
-        console.log(responseData);
-      });
+    const formValue = this.addProductForm.value;
+    this.productService.create(formValue).subscribe(responseData => {
+      console.log(responseData);
+      this.router.navigate([""])
+    });
   }
-
-
-
-  onFetchPosts() {
-    // Send Http request
-  }
-
-  onClearPosts() {
-    // Send Http request
-  }
-  
 }

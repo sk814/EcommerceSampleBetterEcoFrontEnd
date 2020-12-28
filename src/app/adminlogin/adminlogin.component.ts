@@ -1,8 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { JsonpModule } from '@angular/http';
 import { Router } from '@angular/router';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-adminlogin',
@@ -10,11 +9,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./adminlogin.component.css']
 })
 export class AdminloginComponent implements OnInit {
+  errorMessage:string='';
   ngOnInit(): void {
   }
-
-
-  constructor(private router : Router, private http: HttpClient) {
+  constructor(private router : Router,private authService:AuthService) {
 
   }
   
@@ -33,50 +31,14 @@ export class AdminloginComponent implements OnInit {
 
   login()
   {
-
-    const headers=new HttpHeaders({
-      'Content-Type':'application/json; charset=utf-8'
-    });
-    
-   this.http
-     .post(
-       'http://localhost:8000/api/login/',
-       this.form.value,
-       {
-          headers: headers
-       }
-        // JSON.stringify(
-
-        //   {
-        //     username: this.form.get('username'),
-        //     password: this.form.get('password')
-        // }
-
-        // ) 
-     )
-     .subscribe(responseData => {
-
-        
-    // else if (res.status === 200) {
-    //     return [{ status: res.status, json: res }]
-    // }
-
-       console.log(responseData, responseData.valueOf);
-      //  console.log(responseData.valueOf);
-
-      this.router.navigate([""])
-
-       
-     },
-     error => {console.log('USER NOT FOUND!'+ JSON.stringify(error));}
-
-     )
-     ;
-  // this.http
-  //    .post(
-  //      this.form.value);
+    this.errorMessage='';
+    if(this.form.valid)
+      this.authService.login(this.form.value).subscribe(responseData => {
+           this.authService.setToken(responseData)
+          this.router.navigate([""])
+         },
+         error => {this.errorMessage = JSON.stringify(error?.error?.error)}
+         )    
+  
   }
-
-
-
 }
